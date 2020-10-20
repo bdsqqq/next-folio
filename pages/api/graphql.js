@@ -24,13 +24,12 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    projects(_parent, _args, _context, _info) {
-      return _context.db
+    projects: async (_parent, _args, _context, _info) => {
+      return await _context.db
         .collection("projects")
-        .findOne()
-        .then((data) => {
-          return data.projects;
-        });
+        .find({})
+        .limit(20)
+        .toArray();
     },
   },
 };
@@ -42,7 +41,9 @@ const schema = makeExecutableSchema({
 
 const apolloServer = new ApolloServer({
   schema,
-  context: async () => await connectToDatabase(),
+  context: async () => {
+    return await connectToDatabase();
+  },
 });
 
 export const config = {
