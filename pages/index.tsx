@@ -1,15 +1,23 @@
 import Head from "next/head";
 import { GetStaticProps } from "next";
 
-import Hero from '../components/ui/Hero'
+import useSWR from "swr";
 
-import { connectToDatabase } from "../util/mongodb";
+import Hero from "../components/ui/Hero";
+import { fetcher } from "../util/fetcher";
+import { useEffect } from "react";
 
 interface HomeProps {
-  isConnected: boolean;
+  locale: any;
 }
 
-const Home:React.FC<HomeProps> = ({ isConnected }) => {
+const Home: React.FC<HomeProps> = ({ locale }) => {
+  const { data } = useSWR(`/api/projects`, fetcher);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
     <div>
       <Head>
@@ -18,28 +26,20 @@ const Home:React.FC<HomeProps> = ({ isConnected }) => {
       </Head>
 
       <main>
-        <Hero headline="Headline" description="description"/>
-        {isConnected ? (
-          <h2>You are connected to MongoDB</h2>
-        ) : (
-          <h2>
-            You are NOT connected to MongoDB. Check the <code>README.md</code>{" "}
-            for instructions.
-          </h2>
-        )}
+        <Hero
+          headline="Desenvolvedor web pronto para criar algo incrível"
+          description=""
+        />
+        {!data ? <h3>Loading</h3> : <h3></h3>}
       </main>
     </div>
   );
-}
+};
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { client } = await connectToDatabase();
-
-  const isConnected:boolean = await client.isConnected(); // Returns true or false
-
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
-    props: { isConnected },
+    props: { locale },
   };
 };
