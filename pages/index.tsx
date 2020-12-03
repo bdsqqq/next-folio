@@ -1,22 +1,15 @@
 import Head from "next/head";
 import { GetStaticProps } from "next";
 
-import useSWR from "swr";
-
-import Hero from "../components/ui/Hero";
-import { fetcher } from "../util/fetcher";
-import { useEffect } from "react";
+import { Hero } from "@ui";
 
 interface HomeProps {
   locale: any;
 }
 
 const Home: React.FC<HomeProps> = ({ locale }) => {
-  const { data } = useSWR(`/api/projects`, fetcher);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  //const { data } = useSWR(`/api/projects`, fetcher);
+  let data;
 
   return (
     <div>
