@@ -50,24 +50,70 @@ const Hero: FC<Props> = ({ headline, description, sm }) => {
             padding: 2.4rem;
           }
 
-          .pageTitleWrpper {
+          .grid {
+            position: relative;
             display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            height: 93%;
+          }
+
+          .pageTitleWrapper {
+            display: flex;
+            flex-flow: column;
             width: 100%;
             height: 100%;
             justify-content: center;
             align-items: flex-start;
+
+            color: ${theme.colors.white};
           }
 
-          .pageTitle {
-            font-size: 6.4rem;
-            letter-spacing: 0.2em;
-            margin-bottom: 2.4rem;
-            color: ${theme.colors.white};
+          .pageTitleWrapper > h1 {
+            font-weight: bold;
+            font-size: 3.6rem;
+            letter-spacing: 0.1em;
+            max-width: 40rem;
+            margin-top: 11.25vh;
           }
 
           .imageWrapper {
             width: 100%;
             height: 100%;
+          }
+
+          @media screen and (min-width: 400px) {
+            .grid {
+              display: grid;
+              grid-template-columns: 2fr 1fr 1fr 2fr;
+              grid-template-rows: 1fr;
+              height: 100%;
+            }
+
+            .pageTitleWrapper {
+              grid-row: 1;
+              grid-column: 1 / 4;
+            }
+          }
+
+          @media screen and (min-width: 640px) {
+            .pageTitleWrapper > h1 {
+              letter-spacing: 0.2em;
+              max-width: 60rem;
+              margin-top: 18rem;
+              font-size: 4.8rem;
+              margin-left: 2rem;
+            }
+          }
+
+          @media screen and (min-width: 1440px) {
+            .pageTitleWrapper > h1 {
+              max-width: 80rem;
+              margin-top: 18rem;
+              font-size: 4.8rem;
+              margin-left: 2rem;
+            }
           }
         `}
       </style>
