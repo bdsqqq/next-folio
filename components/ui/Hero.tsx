@@ -8,9 +8,10 @@ interface Props {
   headline?: string;
   description?: string;
   sm?: boolean;
+  folio?: boolean;
 }
 
-const Hero: FC<Props> = ({ headline, description, sm }) => {
+const Hero: FC<Props> = ({ headline, description, sm, folio }) => {
   return (
     <>
       <div className="heroWrapper">
