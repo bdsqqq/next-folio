@@ -20,6 +20,7 @@ const Home: React.FC<HomeProps> = ({ locale }) => {
 
       <main>
         <Hero
+          folio
           headline="Desenvolvedor web pronto para criar algo incrível"
           description=""
         />
