@@ -27,9 +27,21 @@ const Hero: FC<Props> = ({ headline, description, sm, folio }) => {
         </div>
 
         <div className="heroContent">
-          <h2>Eu sou o Hero</h2>
-          <h1>{headline}</h1>
-          <h6>{description}</h6>
+          {folio ? (
+            <div className="grid">
+              <div className="pageTitleWrapper">
+                <h1>{headline}</h1>
+                <h6>{description}</h6>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="pageTitleWrapper">
+                <h1>{headline}</h1>
+                <h6>{description}</h6>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
